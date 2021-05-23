@@ -96,7 +96,10 @@ function(
 		cat(fres_phi_val,"\n", file=file.path(exe_dir, "params.txt"), append = TRUE)
 		# Benchmark val
 		cat(fres_bench_val,"\n", file=file.path(exe_dir, "params.txt"), append = TRUE)
-		
+	# Create a parameter character vector	
+		params <- c(fres_f_log,fres_f_foc,fres_f_wts, fres_f_nobench, fres_f_filter,
+		            fres_f_stat,fres_f_freq, fres_f_trend,fres_phi_val,
+		            fres_bench_val)
 		
 	# Run Frescalo using parameter file
 		# Print progress
@@ -104,7 +107,7 @@ function(
 		# Create batch file to change directory and then call frescalo
 		if (grepl("linux|apple", R.version$platform)){
 		  setwd(dirname(frescalo_path))
-		  system(paste('"',frescalo_path,'"',sep=""))
+		  system2(frescalo_path, input = params)
 		  setwd(org_wd) 
 		}else{
 		  cat( paste("cd", normalizePath(dirname(frescalo_path))), "\n", file = file.path(exe_dir, "wincomm.cmd"), append = FALSE)
@@ -166,7 +169,7 @@ function(
 						# Create batch file to change directory and then call frescalo
 						if (grepl("linux|apple", R.version$platform)){
 						  setwd(dirname(frescalo_path))
-						  system(paste('"',frescalo_path,'"',sep=""))
+						  system2(frescalo_path, input = params)
 						  setwd(org_wd) 
 						}else{
 						  cat( paste("cd", normalizePath(dirname(frescalo_path))), "\n", file = file.path(exe_dir, "wincomm.cmd"), append = FALSE)
