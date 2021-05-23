@@ -102,7 +102,7 @@ function(
 		# Print progress
 			cat("\nRUNNING FRESCALO\n",rep("*",20),"\n\n", sep="")
 		# Create batch file to change directory and then call frescalo
-		if (grepl("linux|apple", R.version$platform))){
+		if (grepl("linux|apple", R.version$platform)){
 		  setwd(dirname(frescalo_path))
 		  system(paste('"',frescalo_path,'"',sep=""))
 		  setwd(org_wd) 
@@ -164,7 +164,7 @@ function(
 						
 					# Rerun frescalo
 						# Create batch file to change directory and then call frescalo
-						if (grepl("linux|apple", R.version$platform))){
+						if (grepl("linux|apple", R.version$platform)){
 						  setwd(dirname(frescalo_path))
 						  system(paste('"',frescalo_path,'"',sep=""))
 						  setwd(org_wd) 
